@@ -5,12 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MemeGen</title>
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
   </head>
   <body onload="init()">
     <header></header>
     <section class="gallery-container"></section>
-    <section class="editor-container">
+    <section class="meme-container">
+      <form>
+        <input
+          type="text"
+          placeholder="your text here"
+          oninput="onTextInput(this.value)"
+        />
+      </form>
       <canvas
         id="canvas"
         height="400"
@@ -19,6 +26,7 @@
       ></canvas>
     </section>
     <footer></footer>
+
     <script src="js/util.js"></script>
     <script src="js/services/storageService.js"></script>
     <script src="js/galleryController.js"></script>
