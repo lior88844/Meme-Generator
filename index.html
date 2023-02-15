@@ -7,24 +7,59 @@
     <title>MemeGen</title>
     <link rel="stylesheet" href="/styles/style.css" />
   </head>
-  <body onload="init()">
-    <header></header>
+  <body class="main-layout" onload="init()">
+    <header class="header full main-layout">
+      <section class="main-header space-between align-center flex">
+        <div class="logo"><img src="img/logo.png" /></div>
+        <div type="button" class="toggle-menu" onclick="toggleMenu()"></div>
+        <nav class="main-nav">
+          <ul class="main-menu clean-list flex space-between align-center">
+            <a href="#meme"><li class="meme-nav">Edit</li></a>
+            <a href="#gallery"><li class="gallery-nav">Gallery</li></a>
+            <a href="#about"> <li class="about-nav">About</li></a>
+          </ul>
+        </nav>
+      </section>
+    </header>
     <section class="gallery-container"></section>
     <section class="meme-container">
-      <form>
-        <input
-          type="text"
-          placeholder="your text here"
-          oninput="onTextInput(this.value)"
-        />
-      </form>
       <canvas
         id="canvas"
-        height="400"
-        width="400"
+        height="200"
+        width="200"
         style="border: 1px solid black"
       ></canvas>
+      <div class="text-toolbox">
+        <form class="text-toolbox-form">
+          <input
+            class="text-color"
+            value="#ffffff"
+            type="color"
+            oninput="onColorInput(this.value)"
+          />
+          <input
+            class="text-size-up"
+            value="+"
+            type="button"
+            onclick="onSizeInput(5)"
+          />
+          <input
+            class="text-size-down"
+            value="-"
+            type="button"
+            onclick="onSizeInput(-5)"
+          />
+          <input value="↕" type="button" onclick="onSwitchLines()" />
+          <input
+            class="text-box"
+            type="text"
+            placeholder="your text here"
+            oninput="onTextInput(this.value)"
+          />
+        </form>
+      </div>
     </section>
+    <section class="about-container"></section>
     <footer></footer>
 
     <script src="js/util.js"></script>

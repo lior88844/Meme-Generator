@@ -1,0 +1,7 @@
+@media (min-width: 880px);
+ {
+  .meme-container.active {
+    display: flex;
+    flex-direction: row;
+  }
+}

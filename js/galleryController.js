@@ -1,9 +1,9 @@
 "use strict"
 
 function renderGallery() {
-    const elGallery = document.querySelector('.gallery-container')
-    elGallery.style.display = 'block'
     hideMeme()
+    const elGallery = document.querySelector('.gallery-container')
+    elGallery.classList.add('active')
     let htmlStr = ''
     const imgs = getImgs()
     imgs.map(({ id, url }) => {
@@ -17,7 +17,8 @@ function onImgSelect(id) {
     setImg(+id)
     renderMeme()
 }
+
 function hideMeme() {
     const elMeme = document.querySelector('.meme-container')
-    elMeme.style.display = "none"
+    elMeme.classList.remove('active')
 }

@@ -1,3 +1,14 @@
 /* COMPONENTS */
 @import "components/gallery.css";
 @import "components/meme.css";
+@import "/styles/components/header.css";
+
+/* BASICS */
+@import "basics/layout.css";
+@import "basics/helpers.css";
+@import "basics/base.css";
+
+/* SETUP */
+@import "setup/typography.css";
+@import "setup/vars.css";
+@import "setup/mq.css";

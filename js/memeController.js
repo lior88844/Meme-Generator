@@ -4,48 +4,80 @@ var gCtx
 
 
 function renderMeme() {
-    gCanvas = document.querySelector('#canvas')
-    gCtx = gCanvas.getContext('2d')
     hideGallery()
     const elMeme = document.querySelector('.meme-container')
-    elMeme.style.display = "block"
+    elMeme.classList.add('active')
     const meme = getMeme()
-    const img = getImgById(meme.selectedImgId)
-    drawImgFromLocal(img.url)
-    console.log(img);
-    //draw text after the image was loaded(setTimeout)
-    setTimeout(() => drawText(meme), 100)
+    const memeImg = getImgById(meme.selectedImgId)
+    const img = new Image()
+    img.src = memeImg.url
+    img.onload = () => {
+        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+        drawText(meme)
+        drawLineFocus(meme)
+    }
 }
-function drawText({ lines, selectedLineIdx }) {
-    const line = lines[selectedLineIdx]
-    console.log(line);
-    const { txt, size, align, color } = line
-    const stroke = "black"
-    const font = 'impact'
-    gCtx.beginPath()
-    gCtx.lineWidth = 1
-    gCtx.strokeStyle = stroke
-    gCtx.fillStyle = color
-    gCtx.font = `${size}px ${font}`
-    gCtx.textAlign = align
-    gCtx.textBaseline = 'middle'
-    gCtx.fillText(txt, 100, 50) // Draws (fills) a given text at the given (x, y) position.
-    gCtx.strokeText(txt, 100, 50) // Draws (strokes) a given text at the given (x, y) position.
+function drawText({ lines }) {
+    lines.forEach(line => {
+        const { txt, size, color, pos } = line
+        const stroke = "black"
+        const font = 'impact'
+        gCtx.beginPath()
+        gCtx.lineWidth = 1
+        gCtx.strokeStyle = stroke
+        gCtx.fillStyle = color
+        gCtx.font = `${size}px ${font}`
+        gCtx.textAlign = 'start'
+        gCtx.textBaseline = 'top'
+        const { x, y } = pos
+        gCtx.fillText(txt, x, y)
+        gCtx.strokeText(txt, x, y)
+    })
+}
 
-}
 function drawImgFromLocal(url) {
     const img = new Image()
     img.src = url
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+        drawText(meme)
+        drawLineFocus(meme)
     }
 }
 function onTextInput(txt) {
     setLineTxt(txt)
     renderMeme()
 }
-
+function onColorInput(color) {
+    setLineColor(color)
+    renderMeme()
+}
+function onSizeInput(append) {
+    setLineSize(append)
+    renderMeme()
+}
+function onSwitchLines() {
+    setLineFocus()
+    renderMeme()
+}
+function drawLineFocus({ lines, selectedLineIdx }) {
+    //drawing the rec around the current Line
+    const selectedLine = lines[selectedLineIdx]
+    const { pos, txt, size } = selectedLine
+    gCtx.beginPath()
+    gCtx.rect(pos.x - 10, pos.y - 10, gCtx.measureText(txt).width + 20, size + 20)
+    gCtx.strokeStyle = 'white'
+    gCtx.stroke();
+    //adding a dragging btn
+    gCtx.beginPath()
+    gCtx.arc(pos.x - 10, pos.y - 10, 10, 0, 2 * Math.PI)
+    gCtx.strokeStyle = 'black'
+    gCtx.stroke()
+    gCtx.fillStyle = 'white'
+    gCtx.fill()
+}
 function hideGallery() {
     const elGallery = document.querySelector('.gallery-container')
-    elGallery.style.display = "none"
+    elGallery.classList.remove("active")
+
 }

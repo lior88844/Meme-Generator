@@ -1,0 +1,10 @@
+/* montserrat */
+@font-face {
+  font-family: montserrat;
+  src: url(/fonts/montserrat/Montserrat-Light.ttf);
+}
+/* poiret */
+@font-face {
+  font-family: poiret;
+  src: url(/fonts/poiret/PoiretOne-Regular.ttf);
+}
