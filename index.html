@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/styles/style.css" />
   </head>
   <body class="main-layout" onload="init()">
-    <header class="header full main-layout">
+    <header class="header full">
       <section class="main-header space-between align-center flex">
         <div class="logo"><img src="img/logo.png" /></div>
         <div type="button" class="toggle-menu" onclick="toggleMenu()"></div>
@@ -21,14 +21,19 @@
         </nav>
       </section>
     </header>
-    <section class="gallery-container"></section>
+    <section class="gallery">
+      <btn class="flexible-btn" onclick="renderRandomMeme()">I'm flexible</btn>
+      <section class="gallery-container"></section>
+    </section>
     <section class="meme-container">
-      <canvas
-        id="canvas"
-        height="200"
-        width="200"
-        style="border: 1px solid black"
-      ></canvas>
+      <div class="canvas-container">
+        <canvas
+          id="canvas"
+          style="border: 1px solid black"
+          width="400"
+          height="400"
+        ></canvas>
+      </div>
       <div class="text-toolbox">
         <form class="text-toolbox-form">
           <input
@@ -49,13 +54,19 @@
             type="button"
             onclick="onSizeInput(-5)"
           />
-          <input value="↕" type="button" onclick="onSwitchLines()" />
+
           <input
             class="text-box"
             type="text"
             placeholder="your text here"
             oninput="onTextInput(this.value)"
           />
+        </form>
+
+        <form class="line-toolbox">
+          <input value="↕" type="button" onclick="onSwitchLines()" />
+          <input value="Add Line" type="button" onclick="onAddLine()" />
+          <input value="Delete Line" type="button" onclick="onDeleteLine()" />
         </form>
       </div>
     </section>
@@ -64,6 +75,8 @@
 
     <script src="js/util.js"></script>
     <script src="js/services/storageService.js"></script>
+    <script src="js/services/dragBtnService.js"></script>
+    <script src="js/dragBtnController.js"></script>
     <script src="js/galleryController.js"></script>
     <script src="js/memeController.js"></script>
     <script src="js/services/galleryService.js"></script>

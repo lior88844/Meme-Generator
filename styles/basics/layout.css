@@ -13,9 +13,21 @@
 .main-layout > *:not(.full) {
   grid-column: 2;
 }
+/* CANVAS */
+canvas {
+  position: relative;
+}
 
 /* card-layout */
-
+.gallery {
+  display: none;
+}
+.gallery.active {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-block-start: 4em;
+}
 .card-layout {
   display: grid;
 

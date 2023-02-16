@@ -1,32 +1,48 @@
 "use strict"
 var gCanvas
 var gCtx
+var gImg
 
-
+function setCanvas() {
+    gCanvas = document.querySelector('#canvas')
+    gCtx = gCanvas.getContext('2d')
+    addListeners()
+}
 function renderMeme() {
     hideGallery()
     const elMeme = document.querySelector('.meme-container')
     elMeme.classList.add('active')
+    renderCanvas()
+}
+function renderCanvas() {
     const meme = getMeme()
-    const memeImg = getImgById(meme.selectedImgId)
+    gImg = getImgById(meme.selectedImgId)
     const img = new Image()
-    img.src = memeImg.url
+    img.src = gImg.url
     img.onload = () => {
+        // setCanvasSize(img)
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
-        drawText(meme)
-        drawLineFocus(meme)
+        setTextPos()
+        drawText()
+        drawLineFocus()
     }
 }
-function drawText({ lines }) {
+function setCanvasHeight(img) {
+    gCanvas.width = window.innerWidth
+    // gCtx.canvas.height = (img.height * gCanvas.width) / img.width
+}
+function drawText() {
+    const { lines } = getMeme()
     lines.forEach(line => {
-        const { txt, size, color, pos } = line
+        const { txt, size, color, align, pos } = line
         const stroke = "black"
         const font = 'impact'
-        gCtx.beginPath()
+        // gCtx.beginPath()
         gCtx.lineWidth = 1
         gCtx.strokeStyle = stroke
         gCtx.fillStyle = color
         gCtx.font = `${size}px ${font}`
+        //can't be changed!
         gCtx.textAlign = 'start'
         gCtx.textBaseline = 'top'
         const { x, y } = pos
@@ -60,24 +76,18 @@ function onSwitchLines() {
     setLineFocus()
     renderMeme()
 }
-function drawLineFocus({ lines, selectedLineIdx }) {
-    //drawing the rec around the current Line
-    const selectedLine = lines[selectedLineIdx]
-    const { pos, txt, size } = selectedLine
-    gCtx.beginPath()
-    gCtx.rect(pos.x - 10, pos.y - 10, gCtx.measureText(txt).width + 20, size + 20)
-    gCtx.strokeStyle = 'white'
-    gCtx.stroke();
-    //adding a dragging btn
-    gCtx.beginPath()
-    gCtx.arc(pos.x - 10, pos.y - 10, 10, 0, 2 * Math.PI)
-    gCtx.strokeStyle = 'black'
-    gCtx.stroke()
-    gCtx.fillStyle = 'white'
-    gCtx.fill()
+function onAddLine() {
+    const txt = document.querySelector('.text-box').value
+    addLine(txt)
+    renderMeme()
 }
+function onDeleteLine() {
+    deleteLine()
+    renderMeme()
+}
+
 function hideGallery() {
-    const elGallery = document.querySelector('.gallery-container')
+    const elGallery = document.querySelector('.gallery')
     elGallery.classList.remove("active")
 
 }

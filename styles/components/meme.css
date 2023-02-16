@@ -2,16 +2,34 @@
   display: none;
   padding: 20px;
   gap: 10px;
+  border: 1px solid var(--clr4);
+}
+.canvas-container {
+  display: flex;
+  justify-content: center;
+}
+canvas {
+  align-self: center;
 }
 .meme-container.active {
-  display: flex;
-  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(20px 1fr 20px);
+  gap: 10px;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin-block-start: 40px;
+  padding: 40px;
+  background-color: var(--clr0);
+  box-shadow: 0 0 9px 8px var(--clr-1);
 }
 .text-toolbox {
   border: 1px solid var(--clr5);
   padding: 10px;
 }
-
+.meme-container > * {
+  align-content: center;
+}
 .text-toolbox-form {
   display: grid;
   grid-template-areas: "c p m s" "t t t t";

@@ -1,9 +1,6 @@
 "ue strict"
-
 function init() {
-    gCanvas = document.querySelector('#canvas')
-    gCtx = gCanvas.getContext('2d')
-
+    setCanvas()
     navToSection()
     loadContent()
 }
