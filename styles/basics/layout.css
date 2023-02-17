@@ -3,9 +3,9 @@
   display: grid;
   margin: 0;
   grid-template-columns:
-    20px
+    50px
     1fr
-    20px;
+    50px;
 }
 .main-layout > .full {
   grid-column: 1/-1;
@@ -15,9 +15,8 @@
 }
 /* CANVAS */
 canvas {
-  position: relative;
+  width: 100%;
 }
-
 /* card-layout */
 .gallery {
   display: none;

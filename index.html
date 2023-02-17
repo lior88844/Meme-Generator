@@ -6,24 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MemeGen</title>
     <link rel="stylesheet" href="/styles/style.css" />
+    <script
+      src="https://kit.fontawesome.com/20f921df5c.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body class="main-layout" onload="init()">
-    <header class="header full">
+    <div class="main-screen" onclick="toggleMenu()"></div>
+
+    <header class="header full main-layout">
       <section class="main-header space-between align-center flex">
         <div class="logo"><img src="img/logo.png" /></div>
-        <div type="button" class="toggle-menu" onclick="toggleMenu()"></div>
         <nav class="main-nav">
           <ul class="main-menu clean-list flex space-between align-center">
-            <a href="#meme"><li class="meme-nav">Edit</li></a>
-            <a href="#gallery"><li class="gallery-nav">Gallery</li></a>
-            <a href="#about"> <li class="about-nav">About</li></a>
+            <a href="#gallery" onclick="toggleMenu()"
+              ><li class="gallery-nav">Gallery</li></a
+            >
+            <a href="#memes" onclick="toggleMenu()"
+              ><li class="memes-nav">Memes</li></a
+            >
+            <a href="#about" onclick="toggleMenu()">
+              <li class="about-nav">About</li></a
+            >
           </ul>
         </nav>
+        <button
+          type="button"
+          class="btn toggle-menu-btn"
+          onclick="toggleMenu()"
+        >
+          ☰
+        </button>
       </section>
     </header>
     <section class="gallery">
       <btn class="flexible-btn" onclick="renderRandomMeme()">I'm flexible</btn>
       <section class="gallery-container"></section>
+    </section>
+    <section class="saved-memes">
+      <div class="saved-memes-container"></div>
     </section>
     <section class="meme-container">
       <div class="canvas-container">
@@ -35,39 +56,107 @@
         ></canvas>
       </div>
       <div class="text-toolbox">
-        <form class="text-toolbox-form">
-          <input
-            class="text-color"
-            value="#ffffff"
-            type="color"
-            oninput="onColorInput(this.value)"
-          />
-          <input
+        <input
+          class="text-box"
+          type="text"
+          placeholder="add text"
+          oninput="onTextInput(this.value)"
+        />
+        <section class="line-toolbox">
+          <button type="button" onclick="onPositionLine('up')">
+            <i class="fa-solid fa-arrow-up"></i>
+          </button>
+          <button type="button" onclick="onPositionLine('down')">
+            <i class="fa-solid fa-arrow-down"></i>
+          </button>
+          <!-- <button type="button" onclick="onSwitchLines()">
+            <i class="fa-solid fa-arrows-up-down"></i>
+          </button> -->
+          <button value="Add Line" type="button" onclick="onAddLine()">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <button value="Delete Line" type="button" onclick="onDeleteLine()">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </section>
+
+        <section class="text-design-toolbox">
+          <label class="color-picker">
+            <i class="fa-solid fa-palette"></i>
+            <input
+              class="color-input text-color"
+              value="#ffffff"
+              type="color"
+              oninput="onFontColor(this.value)"
+            />
+          </label>
+          <label class="color-label"
+            ><i class="fa-solid fa-paintbrush"></i>
+            <input
+              class="color-input stroke-color"
+              value="#000000"
+              type="color"
+              oninput="onStrokeColor(this.value)"
+            />
+          </label>
+          <select class="fonts" onchange="onFontChange(this.value)">
+            <option value="Impact">Impact</option>
+            <option value="Ariel">Ariel</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="monospace">Monospace</option>
+          </select>
+          <button
             class="text-size-up"
             value="+"
             type="button"
             onclick="onSizeInput(5)"
-          />
-          <input
+          >
+            A+
+          </button>
+          <button
             class="text-size-down"
             value="-"
             type="button"
             onclick="onSizeInput(-5)"
-          />
+          >
+            A-
+          </button>
+          <button
+            class="text-align-right"
+            type="button"
+            onclick="onTextAlign('right')"
+          >
+            <i class="fa-solid fa-align-right"></i>
+          </button>
+          <button
+            class="text-align-center"
+            type="button"
+            onclick="onTextAlign('center')"
+          >
+            <i class="fa-solid fa-align-center"></i>
+          </button>
+          <button
+            class="text-align-left"
+            type="button"
+            onclick="onTextAlign('left')"
+          >
+            <i class="fa-solid fa-align-left"></i>
+          </button>
+        </section>
+        <section class="share-toolbox flex">
+          <button class="save" type="button" onclick="onSave()">
+            <i class="fa-solid fa-floppy-disk"></i> Save
+          </button>
+          <a href="#" onclick="onDownload(this)" download="my-meme"
+            ><button class="download" type="button">
+              <i class="fa-solid fa-download"></i> Download
+            </button></a
+          >
 
-          <input
-            class="text-box"
-            type="text"
-            placeholder="your text here"
-            oninput="onTextInput(this.value)"
-          />
-        </form>
-
-        <form class="line-toolbox">
-          <input value="↕" type="button" onclick="onSwitchLines()" />
-          <input value="Add Line" type="button" onclick="onAddLine()" />
-          <input value="Delete Line" type="button" onclick="onDeleteLine()" />
-        </form>
+          <button class="share" type="button" onclick="onShare()">
+            <i class="fa-brands fa-facebook"></i> Share
+          </button>
+        </section>
       </div>
     </section>
     <section class="about-container"></section>
@@ -75,12 +164,12 @@
 
     <script src="js/util.js"></script>
     <script src="js/services/storageService.js"></script>
-    <script src="js/services/dragBtnService.js"></script>
-    <script src="js/dragBtnController.js"></script>
     <script src="js/galleryController.js"></script>
-    <script src="js/memeController.js"></script>
+    <script src="js/services/savedMemesService.js"></script>
     <script src="js/services/galleryService.js"></script>
     <script src="js/services/memeService.js"></script>
+    <script src="js/memeController.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/savedMemesController.js"></script>
   </body>
 </html>

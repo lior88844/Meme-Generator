@@ -2,11 +2,24 @@
   box-sizing: border-box;
 }
 html {
-  font-family: poiret;
+  font-family: montserrat;
 }
 
 body {
   background-color: var(--clr0);
   font-size: 1rem;
   margin: 0;
+}
+.btn {
+  background-color: transparent;
+  border: none;
+  font-size: 3em;
+  color: var(--clr3);
+  cursor: pointer;
+}
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
 }

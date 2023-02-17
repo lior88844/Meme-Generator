@@ -8,3 +8,7 @@
   font-family: poiret;
   src: url(/fonts/poiret/PoiretOne-Regular.ttf);
 }
+@font-face {
+  font-family: font-awesome;
+  src: url(/fonts/font-awesome/fa-brands-400.ttf);
+}
