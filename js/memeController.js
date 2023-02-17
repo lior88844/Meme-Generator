@@ -83,6 +83,7 @@ function onSwitchLines() {
     updateLineFocus()
     renderMeme()
 }
+
 function renderToolbox() {
     const selectedLine = getSelectedLine()
     if (!selectedLine) return

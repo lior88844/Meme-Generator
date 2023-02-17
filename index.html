@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MemeGen</title>
-    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="styles/style.css" />
     <script
       src="https://kit.fontawesome.com/20f921df5c.js"
       crossorigin="anonymous"
@@ -40,7 +40,12 @@
       </section>
     </header>
     <section class="gallery">
-      <btn class="flexible-btn" onclick="renderRandomMeme()">I'm flexible</btn>
+      <div class="gallery-toolbox flex">
+        <btn class="flexible-btn" onclick="renderRandomMeme()"
+          >I'm flexible</btn
+        >
+        <input />
+      </div>
       <section class="gallery-container"></section>
     </section>
     <section class="saved-memes">

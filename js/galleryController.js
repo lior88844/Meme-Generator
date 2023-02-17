@@ -13,6 +13,7 @@ function renderGallery() {
     })
     elGallery.innerHTML = htmlStr
 }
+
 function onImgSelect(id) {
     _createMeme(+id)
     renderMeme()
