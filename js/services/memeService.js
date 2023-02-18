@@ -17,11 +17,11 @@ var gTxt = [
     'Story of my life',
     'keep Calm'
 ]
+var gStickers
 var gStartPos
 _createMemes()
 _createMeme()
 setFocusedLine()
-
 
 function _createMeme(id) {
     if (id === undefined) id = 1
@@ -30,6 +30,9 @@ function _createMeme(id) {
         selectedLineIdx: 0,
         lines: createLines(2)
     }
+}
+function setMeme(meme) {
+    gMeme = meme
 }
 function createLines(amount) {
     const lines = []
@@ -40,22 +43,41 @@ function createLines(amount) {
     }
     return lines
 }
-function createLine(lineId) {
+
+function createLine(lineId, txt = "add text", isSelected = false, size = 20) {
     const line = {
         lineId,
-        txt: 'add text',
-        size: 20,
+        txt,
+        size,
         align: 'left',
         color: '#ffffff',
         font: 'Impact',
         stroke: '#000000',
-        pos: createPos(lineId),
-        isSelected: false,
+        isSelected,
         isDrag: false
     }
 
     return line
 }
+function createTextPos() {
+
+    const canvasSize = getCanvasSize()
+    const { height, width } = canvasSize
+    gMeme.lines.forEach(line => {
+        if (line.pos) return
+        let { lineId } = line
+        const lineWidth = gCtx.measureText(line.txt).width
+        if (lineId === 0) {
+            line.pos = { x: width / 2, y: line.size + 20 }
+        } else if (lineId === 1) {
+            line.pos = { x: width / 2, y: height - (line.size + 20) }
+        } else {
+            line.pos = { x: width / 2 - lineWidth, y: height / 2 - (line.size + 20) }
+        }
+    })
+
+}
+
 function getMeme() {
     const memeCopy = JSON.parse(JSON.stringify(gMeme))
     return memeCopy
@@ -65,10 +87,12 @@ function updateFontColor(color) {
     const line = getSelectedLine()
     line.color = color
 }
+
 function updateStrokeColor(color) {
     const line = getSelectedLine()
     line.stroke = color
 }
+
 function updateLineSize(append) {
     const line = getSelectedLine()
     const { size } = line
@@ -77,6 +101,7 @@ function updateLineSize(append) {
     if (gCanvas.width - line.pos.x - gCtx.measureText(line.txt).width < 0 && append > 0) return
     line.size += append
 }
+
 function updateFont(font) {
     const line = getSelectedLine()
     line.font = font
@@ -88,9 +113,11 @@ function updateLineTxt(txt) {
     const line = getSelectedLine()
     line.txt = txt
 }
+
 function updateLineFocus() {
     gMeme.selectedLineIdx = gMeme.lines.findIndex(line => line.isSelected)
 }
+
 function setFocusedLine() {
     gMeme.lines.forEach((line, index) => {
         if (index === gMeme.selectedLineIdx) {
@@ -108,11 +135,13 @@ function getSelectedLineCopy() {
     if (!line) return
     return JSON.parse(JSON.stringify(line))
 }
+
 function moveLine(dx, dy) {
     const line = getFocusedLine()
     gMeme.lines[gMeme.selectedLineIdx].pos.x += dx
     gMeme.lines[gMeme.selectedLineIdx].pos.y += dy
 }
+
 function updatePosition(pos) {
     const line = getSelectedLine()
     if (pos === 'left') line.pos.x = 40
@@ -122,6 +151,7 @@ function updatePosition(pos) {
     if (pos === 'down') line.pos.y = 350
 
 }
+
 function createPos(lineId) {
     let pos = {}
     if (lineId === 0) {
@@ -133,20 +163,27 @@ function createPos(lineId) {
     }
     return pos
 }
+
 function addLine(txt) {
     const { lines, selectedLineIdx } = gMeme
-    if (lines.length) txt = 'add text'
     const line = createLine(gMeme.lines.length)
     gMeme.lines.push(line)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
     setFocusedLine()
-    renderMeme()
+}
+function addSticker(sticker) {
+    const line = createLine(gMeme.lines.length, sticker)
+    gMeme.lines.push(line)
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+    setFocusedLine()
 }
 function deleteLine() {
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
-    updateLineFocus()
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+    setFocusedLine()
     renderMeme()
 }
+
 function createRandomMeme() {
     gMeme = {
         selectedImgId: getRandomIntInclusive(0, gImgs.length - 1),
@@ -154,6 +191,7 @@ function createRandomMeme() {
         lines: createRandomLines(getRandomIntInclusive(1, 2))
     }
 }
+
 function createRandomLines(amount) {
     const lines = []
     for (var i = 0; i < amount; i++) {
@@ -165,20 +203,28 @@ function createRandomLines(amount) {
     }
     return lines
 }
+
 function saveMeme() {
     gMemes.push(gMeme)
     saveToStorage(STORAGE_KEY, gMemes)
 }
+
 function setLineWidth(idx, width) {
+    // console.log(width);
     if (!width) return
     gMeme.lines[idx].width = width
 }
+
 function onDown(ev) {
     const pos = getEvPos(ev);
     //finding the line clicked
     const line = gMeme.lines.find(line => isTextClicked(pos, line)
     )
-    if (!line) return
+    if (!line) {
+        gMeme.lines.forEach(line => line.isSelected = false)
+        renderMeme()
+        return
+    }
     //setting all lines to unselect besides the line
     gMeme.lines.forEach(line => line.isSelected = false)
     //Save the pos we start from
@@ -189,6 +235,7 @@ function onDown(ev) {
     renderMeme()
 
 }
+
 function onMove(ev) {
     const pos = getEvPos(ev)
     const line = gMeme.lines.find(line => line.isDrag)
@@ -202,14 +249,20 @@ function onMove(ev) {
     // The canvas is render again after every move
     renderMeme()
 }
+
 function moveText(dx, dy) {
     let line = getSelectedLine()
     line.pos.x += dx
     line.pos.y += dy
 }
+
 function onUp() {
     const line = gMeme.lines.find(line => line.isSelected)
     if (!line) return
     line.isDrag = false
     document.body.style.cursor = 'auto'
+}
+
+function getStickers() {
+    return JSON.parse(JSON.stringify(gStickers))
 }

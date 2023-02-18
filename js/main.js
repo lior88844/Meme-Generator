@@ -40,10 +40,13 @@ function loadContent() {
         case '#memes':
             hideGallery()
             hideMeme()
-            renderSavedMemes()
+            // renderSavedMemes()
             displaySavedMemes()
         default:
+            hideMeme()
+            hideSavedMemes()
             renderGallery()
+            displayGallery()
     }
 }
 function hideSavedMemes() {

@@ -16,7 +16,9 @@
 
     <header class="header full main-layout">
       <section class="main-header space-between align-center flex">
-        <div class="logo"><img src="img/logo.png" /></div>
+        <a href="#gallery">
+          <div class="logo"><img src="img/logo.png" /></div
+        ></a>
         <nav class="main-nav">
           <ul class="main-menu clean-list flex space-between align-center">
             <a href="#gallery" onclick="toggleMenu()"
@@ -40,11 +42,20 @@
       </section>
     </header>
     <section class="gallery">
-      <div class="gallery-toolbox flex">
+      <div class="gallery-toolbox flex space-between">
         <btn class="flexible-btn" onclick="renderRandomMeme()"
           >I'm flexible</btn
         >
-        <input />
+        <input
+          type="text"
+          oninput="onFilterImg(this.value)"
+          onsubmit="onKeywordSubmit()"
+          placeholder="Search An Image"
+        />
+        <div class="keywords-search-container">
+          <div class="keywords-search"></div>
+          <button onclick="toggleKeywords()">...</button>
+        </div>
       </div>
       <section class="gallery-container"></section>
     </section>
@@ -147,6 +158,13 @@
           >
             <i class="fa-solid fa-align-left"></i>
           </button>
+        </section>
+        <section class="stickers-container flex space-between">
+          <button onclick="onSticker(this.value)" value="👓">👓</button>
+          <button onclick="onSticker(this.value)" value="🎩">🎩</button>
+          <button onclick="onSticker(this.value)" value="💋">💋</button>
+          <button onclick="onSticker(this.value)" value="🔥">🔥</button>
+          <button onclick="onSticker(this.value)" value="⭐️">⭐️</button>
         </section>
         <section class="share-toolbox flex">
           <button class="save" type="button" onclick="onSave()">

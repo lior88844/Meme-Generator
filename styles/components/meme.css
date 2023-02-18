@@ -82,3 +82,10 @@ canvas {
 .text-toolbox-form .text-color {
   grid-area: c;
 }
+.sticker {
+  height: 40px;
+  cursor: pointer;
+}
+.stickers-container > * {
+  margin-inline-end: 10px;
+}

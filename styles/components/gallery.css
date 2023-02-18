@@ -42,3 +42,32 @@
 .gallery .flexible-btn:hover {
   background-color: var(--clr3);
 }
+.gallery-toolbox > * {
+  height: fit-content;
+}
+.gallery-toolbox {
+  align-items: flex-end;
+  gap: 10px;
+}
+.gallery-toolbox .keywords-search {
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  width: 360px;
+}
+.gallery-toolbox .keywords-search > * {
+  display: flex;
+  height: fit-content;
+  padding: 0;
+  margin-inline-end: 15px;
+}
+.keywords-search-container {
+  display: flex;
+  font-size: 2em;
+}
+.gallery-toolbox .keywords-search.expand {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: visible;
+  width: 360px;
+}
