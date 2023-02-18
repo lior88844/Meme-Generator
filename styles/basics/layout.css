@@ -27,6 +27,9 @@ canvas {
   flex-direction: column;
   margin-block-start: 4em;
 }
+.about {
+  display: none;
+}
 .card-layout {
   display: grid;
 

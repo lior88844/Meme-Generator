@@ -60,7 +60,6 @@ function createLine(lineId, txt = "add text", isSelected = false, size = 20) {
     return line
 }
 function createTextPos() {
-
     const canvasSize = getCanvasSize()
     const { height, width } = canvasSize
     gMeme.lines.forEach(line => {
@@ -68,11 +67,11 @@ function createTextPos() {
         let { lineId } = line
         const lineWidth = gCtx.measureText(line.txt).width
         if (lineId === 0) {
-            line.pos = { x: width / 2, y: line.size + 20 }
+            line.pos = { x: (width / 2) - lineWidth / 2, y: line.size + 20 }
         } else if (lineId === 1) {
-            line.pos = { x: width / 2, y: height - (line.size + 20) }
+            line.pos = { x: (width / 2) - lineWidth / 2, y: height - (line.size + 20) }
         } else {
-            line.pos = { x: width / 2 - lineWidth, y: height / 2 - (line.size + 20) }
+            line.pos = { x: (width / 2) - lineWidth, y: height / 2 - (line.size + 20) }
         }
     })
 
@@ -144,11 +143,12 @@ function moveLine(dx, dy) {
 
 function updatePosition(pos) {
     const line = getSelectedLine()
+    const { width, height } = getCanvasSize()
     if (pos === 'left') line.pos.x = 40
-    if (pos === 'center') line.pos.x = 180
-    if (pos === 'right') line.pos.x = 280
-    if (pos === 'up') line.pos.y = 50
-    if (pos === 'down') line.pos.y = 350
+    if (pos === 'center') line.pos.x = width / 2
+    if (pos === 'right') line.pos.x = width - 40
+    if (pos === 'up') line.pos.y = gMeme.lines[0].pos.y
+    if (pos === 'down') line.pos.y = gMeme.lines[1].pos.y
 
 }
 
@@ -167,12 +167,14 @@ function createPos(lineId) {
 function addLine(txt) {
     const { lines, selectedLineIdx } = gMeme
     const line = createLine(gMeme.lines.length)
+    createTextPos()
     gMeme.lines.push(line)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
     setFocusedLine()
 }
 function addSticker(sticker) {
     const line = createLine(gMeme.lines.length, sticker)
+    createTextPos()
     gMeme.lines.push(line)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
     setFocusedLine()

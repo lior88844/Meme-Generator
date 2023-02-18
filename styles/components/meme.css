@@ -1,4 +1,4 @@
-.meme-container {
+.edit {
   display: none;
   padding: 20px;
   gap: 10px;
@@ -25,7 +25,7 @@ canvas {
 .color-label {
   height: 10px;
 }
-.meme-container.active {
+.edit.active {
   display: grid;
   grid-template-columns: repeat(20px 1fr 20px);
   gap: 10px;
@@ -36,11 +36,11 @@ canvas {
   background-color: var(--clr0);
   box-shadow: 0 0 9px 8px var(--clr-1);
 }
-.meme-container .text-toolbox {
+.edit .text-toolbox {
   border: 1px solid var(--clr5);
   padding: 10px;
 }
-.meme-container > * {
+.edit > * {
   align-content: center;
 }
 .text-toolbox {

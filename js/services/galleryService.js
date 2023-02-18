@@ -40,7 +40,10 @@ function getImgById(id) {
 }
 
 function setImgFilter(filterBy) {
-    if (filterBy !== undefined) gFilterBy.keyword = filterBy
+    if (filterBy === undefined) {
+        gFilterBy.keyword = ''
+        return
+    } gFilterBy.keyword = filterBy
     return gFilterBy
 }
 function createKeywordCounter() {

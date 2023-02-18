@@ -60,6 +60,7 @@ function drawText() {
         setLineWidth(index, gCtx.measureText(txt).width)
     })
 }
+
 function getCanvasSize() {
     const canvasSize = {
         height: gCanvas.height,
@@ -203,6 +204,7 @@ function getEvPos(ev) {
 }
 
 function isTextClicked(clickedPos, line) {
+    // !DOES NOT WORK ON MOBILE
     const { pos, size, width } = line
     //adding 10 and substracting 10 to cover the focus square 
     return (pos.x - 10 < clickedPos.x && clickedPos.x < pos.x + width + 10 && pos.y - 10 < clickedPos.y && clickedPos.y < pos.y + size + 10)
@@ -213,6 +215,7 @@ function onSticker(sticker) {
     addSticker(sticker)
     renderMeme()
 }
+
 function getLineWidth(txt) {
     const width = gCtx.measureText(txt).width
     return width

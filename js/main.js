@@ -21,34 +21,25 @@ function addListeners() {
 }
 
 function loadContent() {
-    switch (location.hash) {
-        case "#about":
-            renderGallery()
-            break
-        case "#edit":
-            hideGallery()
-            hideSavedMemes()
-            renderMeme()
-            displayMeme()
-            break
-        case "#gallery":
-            hideMeme()
-            hideSavedMemes()
-            renderGallery()
-            displayGallery()
-            break
-        case '#memes':
-            hideGallery()
-            hideMeme()
-            // renderSavedMemes()
-            displaySavedMemes()
-        default:
-            hideMeme()
-            hideSavedMemes()
-            renderGallery()
-            displayGallery()
+    if (!location.hash) {
+        displayContent('#gallery')
+        return
     }
+    displayContent(location.hash)
 }
+
+function displayContent(content) {
+    content = content.slice(1)
+    console.log(content);
+    const sections = document.querySelectorAll(`.page`)
+    sections.forEach(section => {
+        if (section.className.includes(content)) section.classList.add('active')
+        else section.classList.remove('active')
+        if (content === 'gallery') renderGallery()
+        if (content === 'meme') renderMeme()
+    })
+}
+
 function hideSavedMemes() {
     document.querySelector('.saved-memes').classList.remove('active')
 }
@@ -56,10 +47,10 @@ function displaySavedMemes() {
     document.querySelector('.saved-memes').classList.add('active')
 }
 function hideMeme() {
-    document.querySelector('.meme-container').classList.remove('active')
+    document.querySelector('.edit').classList.remove('active')
 }
 function displayMeme() {
-    document.querySelector('.meme-container').classList.add('active')
+    document.querySelector('.edit').classList.add('active')
 }
 function hideGallery() {
     const elGallery = document.querySelector('.gallery')
@@ -69,6 +60,10 @@ function hideGallery() {
 function displayGallery() {
     document.querySelector('.gallery').classList.add('active')
 }
+function displayAbout() {
+    document.querySelector('.about').classList.add('active')
+}
 function toggleMenu() {
     document.body.classList.toggle('menu-open');
 }
+

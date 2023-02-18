@@ -1,7 +1,6 @@
 "use strict"
 
 function renderGallery() {
-    hideMeme()
     const elGallery = document.querySelector('.gallery-container')
     let htmlStr = ``
     const imgs = getImgs()

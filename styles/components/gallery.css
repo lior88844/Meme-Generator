@@ -53,6 +53,7 @@
   display: flex;
   align-items: flex-end;
   overflow: hidden;
+  transition: flex-wrap 0.4s;
   width: 360px;
 }
 .gallery-toolbox .keywords-search > * {
@@ -66,7 +67,6 @@
   font-size: 2em;
 }
 .gallery-toolbox .keywords-search.expand {
-  display: flex;
   flex-wrap: wrap;
   overflow: visible;
   width: 360px;
