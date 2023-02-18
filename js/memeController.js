@@ -27,8 +27,6 @@ function renderMeme() {
     }
 }
 
-
-
 function setCanvasHeight(img) {
     gCanvas.width = window.innerWidth
     // gCtx.canvas.height = (img.height * gCanvas.width) / img.width
@@ -91,6 +89,7 @@ function onStrokeColor(color) {
     updateStrokeColor(color)
     renderMeme()
 }
+
 function onSizeInput(append) {
     updateLineSize(append)
     renderMeme()

@@ -20,11 +20,13 @@ var gFilterBy = { keyword: '' }
 var gFilters = []
 var gKeywordCounter
 createKeywordCounter()
+
 function getImgs() {
     const imgs = getFilteredImgs()
     const imgsCopy = JSON.parse(JSON.stringify(imgs))
     return imgsCopy
 }
+
 createKeywordCounter()
 function getFilteredImgs() {
     const filteredImg = gImgs.filter(img => {
@@ -46,6 +48,7 @@ function setImgFilter(filterBy) {
     } gFilterBy.keyword = filterBy
     return gFilterBy
 }
+
 function createKeywordCounter() {
     const keywords = []
     gImgs.forEach(img => {
@@ -57,6 +60,7 @@ function createKeywordCounter() {
     }, {})
 
 }
+
 function getKeywordCounter() {
     return JSON.parse(JSON.stringify(gKeywordCounter))
 }

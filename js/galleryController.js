@@ -24,12 +24,14 @@ function renderRandomMeme() {
     renderMeme()
     window.location.hash = '#edit';
 }
+
 function onFilterImg(txt) {
     console.log(txt);
     var filterBy = setImgFilter(txt);
     renderGallery();
     setQueryParams(filterBy);
 }
+
 function renderKeywordSearch() {
     const elContainer = document.querySelector('.keywords-search')
     let strHtml = ''
@@ -39,6 +41,7 @@ function renderKeywordSearch() {
     }
     elContainer.innerHTML = strHtml
 }
+
 function toggleKeywords() {
     document.querySelector(".keywords-search").classList.toggle('expand');
 }

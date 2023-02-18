@@ -5,6 +5,7 @@
   grid-template-columns: repeat(2, 1fr);
   grid-auto-flow: dense;
   margin-block-start: 1em;
+  width: 100vw;
 }
 
 .gallery .gallery-container .img-card {

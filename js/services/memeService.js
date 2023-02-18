@@ -59,6 +59,7 @@ function createLine(lineId, txt = "add text", isSelected = false, size = 20) {
 
     return line
 }
+
 function createTextPos() {
     const canvasSize = getCanvasSize()
     const { height, width } = canvasSize
@@ -144,11 +145,12 @@ function moveLine(dx, dy) {
 function updatePosition(pos) {
     const line = getSelectedLine()
     const { width, height } = getCanvasSize()
+
     if (pos === 'left') line.pos.x = 40
     if (pos === 'center') line.pos.x = width / 2
     if (pos === 'right') line.pos.x = width - 40
-    if (pos === 'up') line.pos.y = gMeme.lines[0].pos.y
-    if (pos === 'down') line.pos.y = gMeme.lines[1].pos.y
+    if (pos === 'up') line.pos.y = line.size + 20
+    if (pos === 'down') line.pos.y = height - (line.size + 20)
 
 }
 
@@ -172,6 +174,7 @@ function addLine(txt) {
     gMeme.selectedLineIdx = gMeme.lines.length - 1
     setFocusedLine()
 }
+
 function addSticker(sticker) {
     const line = createLine(gMeme.lines.length, sticker)
     createTextPos()
@@ -179,6 +182,7 @@ function addSticker(sticker) {
     gMeme.selectedLineIdx = gMeme.lines.length - 1
     setFocusedLine()
 }
+
 function deleteLine() {
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
