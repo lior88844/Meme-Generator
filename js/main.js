@@ -3,6 +3,8 @@
 function init() {
     setCanvas()
     navToSection()
+    renderGallery()
+    renderMeme()
     loadContent()
     addListeners()
 }
@@ -18,7 +20,7 @@ function addListeners() {
     addTouchListeners()
     //Listen for resize ev
     window.addEventListener('resize', () => {
-        init()
+
     })
 }
 
@@ -36,8 +38,6 @@ function displayContent(content) {
     sections.forEach(section => {
         if (section.className.includes(content)) section.classList.add('active')
         else section.classList.remove('active')
-        if (content === 'gallery') renderGallery()
-        if (content === 'edit') renderMeme()
     })
 }
 

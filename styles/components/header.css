@@ -5,6 +5,7 @@
 
 .main-header .logo img {
   height: 100px;
+  padding: 20px;
 }
 .main-header .main-nav a {
   align-items: center;

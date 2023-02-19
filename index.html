@@ -25,7 +25,7 @@
               ><li class="gallery-nav">Gallery</li></a
             >
             <a href="#memes" onclick="toggleMenu()"
-              ><li class="memes-nav">Memes</li></a
+              ><li hidden class="memes-nav">Memes</li></a
             >
             <a href="#about" onclick="toggleMenu()">
               <li class="about-nav">About</li></a
@@ -47,14 +47,15 @@
           >I'm flexible</btn
         >
         <input
+          class="search-img"
           type="text"
           oninput="onFilterImg(this.value)"
           onsubmit="onKeywordSubmit()"
           placeholder="Search An Image"
         />
         <div class="keywords-search-container">
+          <button class="more-btn" onclick="toggleKeywords()"></button>
           <div class="keywords-search"></div>
-          <button onclick="toggleKeywords()">...</button>
         </div>
       </div>
       <section class="gallery-container"></section>
@@ -79,27 +80,52 @@
           oninput="onTextInput(this.value)"
         />
         <section class="line-toolbox">
-          <button type="button" onclick="onPositionLine('up')">
+          <button
+            type="button"
+            onclick="onPositionLine('up')"
+            title="Position Line Up"
+          >
             <i class="fa-solid fa-arrow-up"></i>
           </button>
-          <button type="button" onclick="onPositionLine('down')">
+          <button
+            title="Position Line Down"
+            type="button"
+            onclick="onPositionLine('down')"
+          >
             <i class="fa-solid fa-arrow-down"></i>
           </button>
           <!-- <button type="button" onclick="onSwitchLines()">
             <i class="fa-solid fa-arrows-up-down"></i>
           </button> -->
-          <button value="Add Line" type="button" onclick="onAddLine()">
+          <button
+            title="Add Line"
+            value="Add Line"
+            type="button"
+            onclick="onAddLine()"
+          >
             <i class="fa-solid fa-plus"></i>
           </button>
-          <button value="Delete Line" type="button" onclick="onDeleteLine()">
+          <button
+            title="Delete Line"
+            value="Delete Line"
+            type="button"
+            onclick="onDeleteLine()"
+          >
             <i class="fa-solid fa-trash"></i>
           </button>
         </section>
 
         <section class="text-design-toolbox">
+          <select class="fonts" onchange="onFontChange(this.value)">
+            <option value="Impact">Impact</option>
+            <option value="Ariel">Ariel</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="monospace">Monospace</option>
+          </select>
           <label class="color-picker">
             <i class="fa-solid fa-palette"></i>
             <input
+              title="Font Color"
               class="color-input text-color"
               value="#ffffff"
               type="color"
@@ -112,16 +138,12 @@
               class="color-input stroke-color"
               value="#000000"
               type="color"
+              title="Outline Color"
               oninput="onStrokeColor(this.value)"
             />
           </label>
-          <select class="fonts" onchange="onFontChange(this.value)">
-            <option value="Impact">Impact</option>
-            <option value="Ariel">Ariel</option>
-            <option value="fantasy">Fantasy</option>
-            <option value="monospace">Monospace</option>
-          </select>
           <button
+            title="Text Size Up"
             class="text-size-up"
             value="+"
             type="button"
@@ -130,6 +152,7 @@
             A+
           </button>
           <button
+            title="Text Size Down"
             class="text-size-down"
             value="-"
             type="button"
@@ -137,27 +160,32 @@
           >
             A-
           </button>
-          <button
-            class="text-align-right"
-            type="button"
-            onclick="onTextAlign('right')"
-          >
-            <i class="fa-solid fa-align-right"></i>
-          </button>
-          <button
-            class="text-align-center"
-            type="button"
-            onclick="onTextAlign('center')"
-          >
-            <i class="fa-solid fa-align-center"></i>
-          </button>
-          <button
-            class="text-align-left"
-            type="button"
-            onclick="onTextAlign('left')"
-          >
-            <i class="fa-solid fa-align-left"></i>
-          </button>
+          <div class="align">
+            <button
+              title="Text Align Left"
+              class="text-align-left"
+              type="button"
+              onclick="onTextAlign('left')"
+            >
+              <i class="fa-solid fa-align-left"></i>
+            </button>
+            <button
+              title="Text Align Center"
+              class="text-align-center"
+              type="button"
+              onclick="onTextAlign('center')"
+            >
+              <i class="fa-solid fa-align-center"></i>
+            </button>
+            <button
+              title="Text Align Right"
+              class="text-align-right"
+              type="button"
+              onclick="onTextAlign('right')"
+            >
+              <i class="fa-solid fa-align-right"></i>
+            </button>
+          </div>
         </section>
         <section class="stickers-container flex space-between">
           <button onclick="onSticker(this.value)" value="👓">👓</button>
@@ -188,21 +216,6 @@
           <h1>About The Developer</h1>
           <img src="img/about.jpeg" style="height: 100px" />
         </div>
-        <p>
-          Hi there! I'm Lior, and if you're reading this, it means you've found
-          my portfolio.
-        </p>
-        <p>
-          I'm a 27-year-old full-stack developer who is currently studying in
-          the
-          <a
-            href="https://www.coding-academy.org/v3/?cmp=BrandEnglishFeb23&gclid=Cj0KCQiAi8KfBhCuARIsADp-A566XHvSaOYD7YtIrqjI9KN7dXpHKGEQT7zY5D5_yS608QZmrTcirH0aAlvQEALw_wcB"
-            target="_blank"
-            >"Coding Academy"</a
-          >
-          course. My website was created while I was learning how to code, and
-          it was a lot of fun to make. If you enjoyed it, please let me know.
-        </p>
         <ul class="flex space-between clean-list">
           <li class="linkedin">
             <i class="fa-brands fa-linkedin"></i>
@@ -215,13 +228,13 @@
 
     <footer></footer>
 
-    <script src="js/util.js"></script>
-    <script src="js/services/storageService.js"></script>
-    <script src="js/galleryController.js"></script>
-    <script src="js/services/savedMemesService.js"></script>
-    <script src="js/services/galleryService.js"></script>
-    <script src="js/services/memeService.js"></script>
-    <script src="js/memeController.js"></script>
+    <script src="js/services/util.service.js"></script>
+    <script src="js/services/storage.service.js"></script>
+    <script src="js/services/saved-memes.service.js"></script>
+    <script src="js/services/gallery.service.js"></script>
+    <script src="js/services/meme.service.js"></script>
+    <script src="js/gallery.controller.js"></script>
+    <script src="js/meme.controller.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

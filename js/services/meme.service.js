@@ -68,11 +68,13 @@ function createTextPos() {
         let { lineId } = line
         const lineWidth = gCtx.measureText(line.txt).width
         if (lineId === 0) {
-            line.pos = { x: (width / 2) - lineWidth / 2, y: line.size + 20 }
+            line.pos = {
+                x: (width / 2) - (lineWidth / 2), y: 20
+            }
         } else if (lineId === 1) {
-            line.pos = { x: (width / 2) - lineWidth / 2, y: height - (line.size + 20) }
+            line.pos = { x: width / 2 - (lineWidth / 2), y: height - (line.size + 20) }
         } else {
-            line.pos = { x: (width / 2) - lineWidth, y: height / 2 - (line.size + 20) }
+            line.pos = { x: (width / 2) - (lineWidth / 2), y: height / 2 - (line.size + 20) }
         }
     })
 
@@ -130,6 +132,7 @@ function getSelectedLine() {
     const line = gMeme.lines.find(line => line.isSelected)
     return line
 }
+
 function getSelectedLineCopy() {
     const line = getSelectedLine()
     if (!line) return
@@ -147,9 +150,9 @@ function updatePosition(pos) {
     const { width, height } = getCanvasSize()
 
     if (pos === 'left') line.pos.x = 40
-    if (pos === 'center') line.pos.x = width / 2
-    if (pos === 'right') line.pos.x = width - 40
-    if (pos === 'up') line.pos.y = line.size + 20
+    if (pos === 'center') line.pos.x = width / 2 - (line.size)
+    if (pos === 'right') line.pos.x = width - 150
+    if (pos === 'up') line.pos.y = 20
     if (pos === 'down') line.pos.y = height - (line.size + 20)
 
 }

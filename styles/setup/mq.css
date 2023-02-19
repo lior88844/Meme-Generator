@@ -37,6 +37,16 @@
     pointer-events: auto;
     opacity: 1;
   }
+  .gallery-toolbox {
+    font-size: 0.5em;
+  }
+  .gallery-toolbox {
+    padding: 5px;
+  }
+
+  .gallery-toolbox .keywords-search {
+    width: 100%;
+  }
 }
 
 /* DESKTOP */
@@ -46,15 +56,18 @@
     flex-direction: row;
   }
   .gallery .gallery-container {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, minmax(auto, 1fr));
   }
   .main-layout {
     grid-template-columns:
-      100px
-      1fr
-      100px;
+      minmax(20px, 1fr)
+      minmax(auto, 1000px)
+      minmax(20px, 1fr);
   }
   .toggle-menu-btn {
     display: none;
+  }
+  .edit.active {
+    grid-template-columns: repeat(2, minmax(auto, 1fr));
   }
 }

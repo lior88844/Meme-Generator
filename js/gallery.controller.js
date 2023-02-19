@@ -43,5 +43,5 @@ function renderKeywordSearch() {
 }
 
 function toggleKeywords() {
-    document.querySelector(".keywords-search").classList.toggle('expand');
+    document.querySelector(".gallery-toolbox").classList.toggle('expand');
 }

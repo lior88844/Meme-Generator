@@ -2,10 +2,9 @@
   display: grid;
   gap: 20px;
   margin: 0 auto;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(auto, 1fr));
   grid-auto-flow: dense;
   margin-block-start: 1em;
-  width: 100vw;
 }
 
 .gallery .gallery-container .img-card {
@@ -24,13 +23,17 @@
 }
 .gallery-container .img-card:hover::after {
   content: "edit→";
+  padding: 5px;
   font-size: 1em;
   position: absolute;
   top: 0;
   right: 0;
+  background-color: var(--clr4);
   color: var(--clr1);
 }
 .gallery .flexible-btn {
+  display: flex;
+  align-content: center;
   width: fit-content;
   font-family: montserrat;
   font-size: 1.1em;
@@ -46,14 +49,25 @@
 .gallery-toolbox > * {
   height: fit-content;
 }
+.gallery-toolbox.expand {
+  overflow: visible;
+}
+.gallery-toolbox .search-img {
+  width: 10em;
+  padding: 10px;
+  font-size: 1em;
+}
 .gallery-toolbox {
   align-items: flex-end;
   gap: 10px;
+  background-color: var(--clr-1);
+  padding: 20px 50px;
+  border-radius: 50px;
+  overflow: hidden;
 }
 .gallery-toolbox .keywords-search {
   display: flex;
   align-items: flex-end;
-  overflow: hidden;
   transition: flex-wrap 0.4s;
   width: 360px;
 }
@@ -65,10 +79,20 @@
 }
 .keywords-search-container {
   display: flex;
-  font-size: 2em;
+  font-size: 1em;
 }
-.gallery-toolbox .keywords-search.expand {
+.gallery-toolbox.expand .keywords-search {
   flex-wrap: wrap;
   overflow: visible;
-  width: 360px;
+}
+.more-btn::before {
+  display: grid;
+  content: "view more...";
+  align-items: flex-end;
+  font-size: 1em;
+  justify-self: end;
+  color: var(--clr3);
+}
+.gallery-toolbox.expand .more-btn::before {
+  content: "view less...";
 }

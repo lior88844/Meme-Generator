@@ -1,8 +1,15 @@
 .edit {
   display: none;
+  justify-content: center;
+  width: 100%;
+  margin-block-start: 40px;
+  padding: 40px;
+  background-color: var(--clr0);
+}
+.edit.active {
+  display: grid;
   padding: 20px;
   gap: 10px;
-  border: 1px solid var(--clr4);
 }
 .canvas-container {
   display: flex;
@@ -25,18 +32,9 @@ canvas {
 .color-label {
   height: 10px;
 }
-.edit.active {
-  display: grid;
-  grid-template-columns: repeat(20px 1fr 20px);
-  gap: 10px;
-  justify-content: center;
-  width: 100%;
-  margin-block-start: 40px;
-  padding: 40px;
-  background-color: var(--clr0);
-  box-shadow: 0 0 9px 8px var(--clr-1);
-}
+
 .edit .text-toolbox {
+  justify-content: space-between;
   border: 1px solid var(--clr5);
   padding: 10px;
 }
@@ -45,17 +43,30 @@ canvas {
 }
 .text-toolbox {
   display: flex;
+  gap: 5px;
   flex-direction: column;
   align-items: center;
+  background-color: var(--clr-1);
 }
 .text-toolbox > * {
   margin-block-start: 0.5em;
+  gap: 10px;
 }
 .text-toolbox .line-toolbox > * {
   font-family: font-awesome;
+  padding: 2px;
+  background-color: var(--clr3);
+  width: 2em;
+  height: 2em;
+  font-size: 1.5em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.text-toolbox .line-toolbox :hover {
+  transform: translate(2px, 2px);
 }
 .text-toolbox .text-box {
   width: 100%;
+  font-size: 2em;
   height: 40px;
 }
 .text-toolbox input[type="button"] {
@@ -68,6 +79,7 @@ canvas {
   background-color: none;
 }
 .text-toolbox-form > *[type="button"]:hover {
+  transform: translate(2px, 2px);
   cursor: pointer;
 }
 .text-toolbox-form .text-size-up {
@@ -86,6 +98,72 @@ canvas {
   height: 40px;
   cursor: pointer;
 }
+
 .stickers-container > * {
+  font-size: 2em;
   margin-inline-end: 10px;
+  transition: scale 0.4s;
+}
+.stickers-container > *:hover {
+  scale: 1.5;
+}
+.stickers-container {
+  background-color: var(--clr2);
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.text-design-toolbox {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(4, minmax(auto, 1fr));
+  align-items: center;
+}
+
+.text-design-toolbox > *:not(:last-child, :first-child) {
+  font-family: font-awesome;
+  padding: 2px;
+  background-color: var(--clr3);
+  width: 2em;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.text-design-toolbox button,
+label {
+  transition: translate 0.4s;
+}
+.text-design-toolbox button:hover,
+label:hover {
+  transform: translate(2px, 2px);
+  cursor: pointer;
+}
+.text-design-toolbox .align > * {
+  padding: 2px;
+  background-color: var(--clr3);
+  width: 2em;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.text-design-toolbox .fonts {
+  grid-column: 1/-1;
+  font-size: 1.5em;
+}
+.align {
+  justify-self: center;
+  display: flex;
+  gap: 10px;
+  grid-column: 1/-1;
+}
+.share-toolbox > * {
+  transition: scale 0.4s;
+}
+.share-toolbox > *:hover {
+  scale: 1.1;
 }
