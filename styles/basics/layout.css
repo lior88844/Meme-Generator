@@ -10,10 +10,7 @@
 .main-layout > *:not(.full) {
   grid-column: 2;
 }
-/* CANVAS */
-canvas {
-  width: 100%;
-}
+
 /* card-layout */
 .gallery {
   display: none;

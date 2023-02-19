@@ -44,7 +44,7 @@ function createLines(amount) {
     return lines
 }
 
-function createLine(lineId, txt = "add text", isSelected = false, size = 20) {
+function createLine(lineId, txt = "add text", isSelected = false, size = 40) {
     const line = {
         lineId,
         txt,
