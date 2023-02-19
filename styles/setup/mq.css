@@ -47,6 +47,10 @@
   .gallery-toolbox .keywords-search {
     width: 100%;
   }
+  .edit.active {
+    padding: 0;
+    margin-block-start: 10px;
+  }
 }
 
 /* DESKTOP */
